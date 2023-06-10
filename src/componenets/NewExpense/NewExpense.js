@@ -21,6 +21,10 @@ const NewExpense = (props) => {
     setShowAddNewExpensebutton(resetButton);
   };
 
+  const onErrorHandler = (message, show, title) => {
+    props.displayErrorPrompt(message, show, title);
+  };
+
   return (
     <div className="new-expense">
       {showAddNewExpensebutton && (
@@ -37,6 +41,7 @@ const NewExpense = (props) => {
         <NewExpenseForm
           onSaveExpenseData={onSaveExpenseDataHandler}
           onReset={onResetHandler}
+          onError={onErrorHandler}
         />
       )}
     </div>

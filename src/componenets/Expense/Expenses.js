@@ -4,6 +4,7 @@ import "./Expenses.css";
 import ExpensesFilter from "../ExpenseFilter/ExpenseFilter";
 import ExpensesList from "./ExpensesList";
 import ExpensesChart from "./ExpensesChart";
+import Wrapper from "../Helpers/Wrapper";
 
 const Expenses = (props) => {
   const expenses = props.expense;
@@ -17,14 +18,14 @@ const Expenses = (props) => {
   });
 
   return (
-    <div>
+    <Wrapper>
       <ExpensesFilter
         selected={filterValue}
         onSelectExpenseFilter={onSelectExpenseFilterHandler}
       />
       <ExpensesChart expenses={filteredExpenses} />
       <ExpensesList items={filteredExpenses} />
-    </div>
+    </Wrapper>
   );
 };
 export default Expenses;

@@ -1,4 +1,5 @@
 .chart-bar {
+  margin: 0.2em;
   height: 100%;
   display: flex;
   flex-direction: column;

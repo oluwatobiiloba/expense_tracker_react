@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "./App.css";
 import Expenses from "./componenets/Expense/Expenses";
 import NewExpense from "./componenets/NewExpense/NewExpense";
+import ErrorPrompt from "./componenets/ErrorPrompt/ErrorPrompt";
+import Wrapper from "./componenets/Helpers/Wrapper";
 
 const dummyExpenses = [
   {
@@ -39,17 +41,40 @@ const dummyExpenses = [
 
 const App = () => {
   const [expenses, setExpenses] = useState(dummyExpenses);
-
+  const [showError, setShowError] = useState({ show: false, message: "" });
   const updateDataHandler = (expense) => {
     setExpenses((prevExpenses) => {
       return [expense, ...prevExpenses];
     });
   };
+
+  const displayErrorPromptHandler = (message, show, title) => {
+    setShowError({
+      show: show,
+      message: message,
+      title: title,
+    });
+  };
   return (
     <div className="App">
       <header className="App-header">
-        <NewExpense updateData={updateDataHandler}></NewExpense>
-        <Expenses expense={expenses}></Expenses>
+        {showError.show && (
+          <ErrorPrompt
+            message={showError.message}
+            title={showError.title}
+            displayErrorPrompt={displayErrorPromptHandler}
+          />
+        )}
+        {showError.show && <div className="blur-effect" />}
+        {
+          <Wrapper>
+            <NewExpense
+              updateData={updateDataHandler}
+              displayErrorPrompt={displayErrorPromptHandler}
+            ></NewExpense>
+            <Expenses expense={expenses}></Expenses>
+          </Wrapper>
+        }
       </header>
     </div>
   );
